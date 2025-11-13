@@ -1,62 +1,88 @@
-# 🎓 College Management System Database Blueprint
+# 🎓 College Management System Database Blueprint (LLM-Assisted Design)
 
-### Project Overview
+This repository provides the detailed Entity-Relationship (ER) Diagram and data model for a comprehensive **College Management System (CMS)**. The system models key aspects of academic, administrative, and extracurricular college operations.
 
-This repository presents the detailed Entity-Relationship (ER) Diagram and data model for a comprehensive College Management System (CMS). [cite_start]The system models key aspects of academic, administrative, and extracurricular college operations[cite: 2, 3].
-
-The diagram serves as a robust blueprint for implementing the college's relational database.
+The final diagram serves as a robust blueprint for implementing the college's relational database.
 
 ---
 
-### ⚙️ Methodology: LLM-Assisted Design
+## ⚙️ Methodology: Multi-LLM-Assisted Design
 
-[cite_start]The ER diagram was generated using a multi-LLM workflow to ensure accuracy and comprehensive coverage of the requirements[cite: 4, 7].
+The ER diagram was generated using an innovative multi-LLM workflow to ensure accuracy and comprehensive coverage of the database requirements.
 
-* [cite_start]**Primary Tool:** Llama 3 via Ollama[cite: 4, 7, 8].
-* [cite_start]**Secondary Tool:** Gemma 2:2B via Ollama[cite: 4, 7].
-* [cite_start]**Visualization:** The output was rendered visually using **Mermaid.js**[cite: 7].
+### 1. LLM Workflow Tools
+The design process was automated using a Streamlit application (`invokeMultipleLLMs.py`) that leverages **LiteLLM** to compare outputs from multiple LLMs running via **Ollama**.
 
-[cite_start]*(Note: While both LLMs were tested, Llama 3 provided the most accurate and usable ER diagram syntax[cite: 4, 8]. The full prompt used is available in `Prompt Text.txt`.)*
+* **Primary Tool:** **Llama 3** (via Ollama)
+* **Secondary Tool:** **Gemma 2:2B** (via Ollama)
+* **Visualization:** The output was rendered visually using **Mermaid.js** syntax.
+
+***Llama 3 provided the most accurate and usable ER diagram syntax.***
+
+### 2. The Prompt
+The full detailed instructions given to the LLMs are available in `Prompt Text.txt`:
+
+* **Goal:** Create a detailed ER diagram for a small college, including 15 entities and their relationships.
+* **Entity Count:** 15 total entities (9 core academic, 6 operational).
+* **Requirements:** Must include attributes and define relationships with cardinality.
+* **Output Constraint:** Output **only in Mermaid syntax**.
 
 ---
 
-### 📊 Data Model (Entities & Relationships)
+## 📊 Data Model: Entities & Relationships
 
-[cite_start]The system is modeled using 15 core entities, defining attributes and cardinality relationships between them[cite: 5, 6].
+The final data model comprises **15 core entities**, defining attributes and cardinality relationships between them.
 
-#### Core Academic Entities (9)
-| Entity | Attributes Example |
+### Core Entities
+| Entity | Key Attributes |
 | :--- | :--- |
-| [cite_start]**Student** | student\_id, name, dob, email, phone [cite: 5] |
-| [cite_start]**Professor** | prof\_id, name, department\_id, email [cite: 15] |
-| [cite_start]**Course** | course\_id, name, department\_id, credits [cite: 5] |
-| [cite_start]**Enrollment** | enrollment\_id, student\_id, course\_id, grade\_point\_average [cite: 17] |
-| [cite_start]**Department** | dept\_id, dept\_name [cite: 16] |
+| **Student** | student\_id, name, dob, email, phone |
+| **Professor** | prof\_id, name, department\_id, email |
+| **Course** | course\_id, name, department\_id, credits |
+| **Enrollment** | enrollment\_id, student\_id, course\_id, grade\_point\_average |
+| **Department** | dept\_id, dept\_name |
+| **Hostel** | hostel\_id, name, capacity |
+| **Staff** | staff\_id, name, department\_id, role |
 
-#### Operational Entities (6)
-* [cite_start]**Hostel:** hostel\_id, name, capacity [cite: 5, 19]
-* [cite_start]**Library** [cite: 6]
-* [cite_start]**Club** [cite: 6]
-* [cite_start]**Staff** [cite: 6]
-* [cite_start]**Event** [cite: 6]
-* [cite_start]**Cafeteria** [cite: 6]
-
-#### Key Relationships Examples
+### Key Relationships
 | Relationship | Cardinality | Description |
 | :--- | :--- | :--- |
-| **Student ENROLLS\_IN Enrollment** | [cite_start]Many-to-Many [cite: 6] | Models student registration for courses. |
-| **Professor TEACHES Course** | [cite_start]One-to-Many [cite: 6] | Links professors to the courses they instruct. |
-| **Hostel HOUSES Student** | [cite_start]One-to-Many [cite: 6, 22] | Assigns students to residence halls. |
-| **Staff MANAGES Cafeteria & Library** | [cite_start]Many-to-One [cite: 6, 22] | Defines administrative oversight. |
+| **Student ENROLLS\_IN Enrollment** | One-to-Many (`||--o{`) | Models student registration for courses. |
+| **Professor TEACHES Course** | One-to-Many (`||--o{`) | Links professors to the courses they instruct. |
+| **Hostel HOUSES Student** | One-to-Many (`||--o{`) | Assigns students to residence halls. |
+| **Staff MANAGES Cafeteria/Library** | One-to-Many (`||--o{`) | Defines administrative oversight for facilities. |
 
 ---
 
-### 📁 Repository Contents
+## 📁 Repository Contents
 
 | File | Description |
 | :--- | :--- |
-| `ER Diagram.jpg` | **The final, visual ER Diagram generated by Llama 3.** |
-| `Output Text.txt` | [cite_start]The raw Mermaid code used to generate the diagram[cite: 15]. |
-| `invokeMultipleLLMs.py` | [cite_start]The Streamlit/LiteLLM Python script used to prompt and compare the LLM outputs[cite: 1]. |
-| `Prompt Text.txt` | [cite_start]The detailed instructions provided to the LLMs to generate the ER diagram[cite: 10]. |
+| `ER Diagram.png` | The final, visual ER Diagram generated by Llama 3. |
+| `Output Text.txt` | The raw **Mermaid code** used to generate the diagram. |
+| `Prompt Text.txt` | The detailed instructions provided to the LLMs to generate the ER diagram. |
+| `invokeMultipleLLMs.py` | The Streamlit/LiteLLM Python script used to prompt and compare the LLM outputs, including GPU support. |
 | `README.md` | This documentation file. |
+
+---
+
+## 🚀 How to Run the LLM Comparison Tool
+
+The `invokeMultipleLLMs.py` script allows you to test multiple LLMs with a single prompt simultaneously.
+
+### Prerequisites
+1.  **Install Ollama** and the required models (Llama 3, Gemma 2:2B):
+    ```bash
+    ollama run llama3
+    ollama run gemma2:2b
+    ```
+2.  **Python Dependencies**:
+    ```bash
+    # Includes Streamlit, LiteLLM, and PyTorch (for optional GPU detection)
+    pip install streamlit litellm torch
+    ```
+
+### Execution
+Run the Streamlit application from your terminal:
+```bash
+streamlit run invokeMultipleLLMs.py
