@@ -1,0 +1,58 @@
+You are a database designer. Create a detailed ER diagram for a small college, including 15 entities and their relationships.  
+
+1. Core 9 entities:
+   - Student
+   - Professor
+   - Class
+   - School
+   - Department
+   - Course
+   - Room
+   - Enroll
+   - Building
+
+2. Additional 6 entities:
+   - Library
+   - Hostel
+   - Club
+   - Staff
+   - Event
+   - Cafeteria
+
+3. Include "attributes" for each entity. Examples:
+   - Student: student_id, name, dob, email, phone
+   - Professor: prof_id, name, department_id, email
+   - Course: course_id, name, department_id, credits
+   - Class: class_id, course_id, professor_id, schedule
+   - Room: room_id, building_id, capacity
+   - Enroll: enroll_id, student_id, class_id
+   - Library: library_id, name, location
+   - Hostel: hostel_id, name, capacity
+   - Club: club_id, name, description
+   - Staff: staff_id, name, role, department_id
+   - Event: event_id, name, date, location
+   - Cafeteria: cafeteria_id, name, menu
+
+4. Define "relationships" with cardinality. Examples:
+   - Student ENROLLS_IN Class (many-to-many)
+   - Professor TEACHES Class (one-to-many)
+   - Course BELONGS_TO Department (many-to-one)
+   - Class HELD_IN Room (many-to-one)
+   - Room LOCATED_IN Building (many-to-one)
+   - Student RESIDES_IN Hostel (many-to-one)
+   - Club ORGANIZES Event (one-to-many)
+   - Staff WORKS_AT Cafeteria (many-to-one)
+   - Library MANAGED_BY Staff (many-to-one)
+
+5. Output **only in Mermaid syntax**, in the format:
+
+```mermaid
+erDiagram
+    Entity1 {
+        attribute1
+        attribute2
+    }
+    Entity2 {
+        attribute1
+    }
+    Entity1 ||--o{ Entity2 : "relationship"

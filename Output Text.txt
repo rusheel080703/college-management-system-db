@@ -1,0 +1,100 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+    Student {
+        string student_id
+        string name
+        string dob
+        string email
+        string phone
+    }
+    Professor {
+        string prof_id
+        string name
+        string department_id
+        string email
+    }
+    Course {
+        string course_id
+        string name
+        string department_id
+        int credits
+    }
+    Department {
+        string dept_id
+        string dept_name
+    }
+    Classroom {
+        string classroom_id
+        int capacity
+    }
+    Enrollment {
+        string enrollment_id
+        string student_id
+        string course_id
+        float grade_point_average
+    }
+    Schedule {
+        string schedule_id
+        string course_id
+        string professor_id
+        date date
+    }
+    Assignment {
+        string assignment_id
+        string assignment_content
+        string student_id
+        string course_id
+    } 
+    Exam {
+        string exam_id
+        string exam_name
+        string subject_id
+    }
+    Library {
+        string library_id
+        string name
+        string location
+    }
+    Hostel {
+        string hostel_id
+        string name
+        int capacity
+    } 
+    Club {
+        string club_id
+        string name
+        string description
+        string club_leader_id
+    } 
+    Staff {
+        string staff_id
+        string name
+        string department_id
+        string role
+    } 
+    Event {
+        string event_id
+        string event_name
+        date date
+        string location
+        string club_id
+    }
+    Cafeteria {
+        string cafeteria_id
+        string name
+        string menu
+    }
+    Student ||--o{ Enrollment : "enrolls in"
+    Professor ||--o{ Course : "TEACHES"
+    Course ||--o{ Enrollment : "enrolls in"
+    Professor ||--o{ Department : "works at"
+    Classroom ||--o{ Schedule : "holds"
+    Schedule ||--o{ Assignment : "deals with"
+    Student ||--o{ Exam : "takes"
+    Club ||--o{ Event : "hosts"
+    Staff ||--o{ Cafeteria : "manages"
+    Staff ||--o{ Library : "manages"
+    Hostel ||--o{ Student : "houses"
