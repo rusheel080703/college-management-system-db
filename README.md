@@ -1,88 +1,161 @@
-# 🎓 College Management System Database Blueprint (LLM-Assisted Design)
+# 🎓 College Management System Database Blueprint
 
-This repository provides the detailed Entity-Relationship (ER) Diagram and data model for a comprehensive **College Management System (CMS)**. The system models key aspects of academic, administrative, and extracurricular college operations.
+**Designing a robust relational schema for a college using a Multi-LLM Workflow and Mermaid.js.**
 
-The final diagram serves as a robust blueprint for implementing the college's relational database.
+This repository presents the detailed **Entity-Relationship (ER) Diagram** and data model for a comprehensive **College Management System (CMS)**. The system models key aspects of academic, administrative, and extracurricular college operations.
 
----
-
-## ⚙️ Methodology: Multi-LLM-Assisted Design
-
-The ER diagram was generated using an innovative multi-LLM workflow to ensure accuracy and comprehensive coverage of the database requirements.
-
-### 1. LLM Workflow Tools
-The design process was automated using a Streamlit application (`invokeMultipleLLMs.py`) that leverages **LiteLLM** to compare outputs from multiple LLMs running via **Ollama**.
-
-* **Primary Tool:** **Llama 3** (via Ollama)
-* **Secondary Tool:** **Gemma 2:2B** (via Ollama)
-* **Visualization:** The output was rendered visually using **Mermaid.js** syntax.
-
-***Llama 3 provided the most accurate and usable ER diagram syntax.***
-
-### 2. The Prompt
-The full detailed instructions given to the LLMs are available in `Prompt Text.txt`:
-
-* **Goal:** Create a detailed ER diagram for a small college, including 15 entities and their relationships.
-* **Entity Count:** 15 total entities (9 core academic, 6 operational).
-* **Requirements:** Must include attributes and define relationships with cardinality.
-* **Output Constraint:** Output **only in Mermaid syntax**.
+![ER Diagram](ER%20Diagram.png)
 
 ---
 
-## 📊 Data Model: Entities & Relationships
+## 📋 Table of Contents
 
-The final data model comprises **15 core entities**, defining attributes and cardinality relationships between them.
+1.  [🧠 Methodology: LLM-Assisted Design](#-methodology-llm-assisted-design)
+2.  [🛠 Tech Stack](#-tech-stack)
+3.  [📊 Data Model Summary](#-data-model-summary)
+4.  [💻 Setup & Execution](#-setup--execution)
+5.  [📁 Repository Contents](#-repository-contents)
+6.  [🧑‍💻 Author](#-author)
 
-### Core Entities
-| Entity | Key Attributes |
-| :--- | :--- |
-| **Student** | student\_id, name, dob, email, phone |
-| **Professor** | prof\_id, name, department\_id, email |
-| **Course** | course\_id, name, department\_id, credits |
-| **Enrollment** | enrollment\_id, student\_id, course\_id, grade\_point\_average |
-| **Department** | dept\_id, dept\_name |
-| **Hostel** | hostel\_id, name, capacity |
-| **Staff** | staff\_id, name, department\_id, role |
+---
+
+## 🧠 Methodology: LLM-Assisted Design
+
+The ER diagram was generated using an innovative **multi-LLM workflow** to ensure accuracy and comprehensive coverage of the database requirements. This process showcases advanced prompt engineering and model evaluation techniques.
+
+### LLM Workflow Tools
+
+The database schema was generated using a Streamlit application (`invokeMultipleLLMs.py`) that leverages **LiteLLM** to compare outputs from multiple Large Language Models (LLMs) running via **Ollama**.
+
+| Tool | Purpose | Status |
+| :--- | :--- | :--- |
+| **LLMs** | **Llama 3** (Primary) & **Gemma 2:2B** (Secondary) | Tested/Compared |
+| **Orchestration** | LiteLLM (for unified API calls) | Implemented |
+| **Interface** | Streamlit (for side-by-side comparison UI) | Implemented |
+| **Visualization** | Mermaid.js ER Diagram Syntax | Final Output |
+
+> **Result:** **Llama 3** provided the most accurate and usable ER diagram syntax, which forms the final blueprint.
+
+### The Prompt Text
+
+The detailed instructions provided to the LLMs are available in `Prompt Text.txt`. The prompt explicitly required:
+* A total of **15 entities** (9 core academic, 6 operational).
+* Detailed **attributes** for each entity.
+* Clearly defined **relationships** with cardinality (e.g., Many-to-One).
+* Output **only in Mermaid syntax**.
+
+---
+
+## 🛠 Tech Stack
+
+### 🔹 Database & Design
+- **Data Modeling:** 15 Entity Schema Blueprint
+- **Visualization:** Mermaid.js ER Diagram Syntax
+
+### 🔹 LLM Integration
+- **LLM Orchestration:** Python with LiteLLM
+- **Models:** Ollama (Llama 3, Gemma 2:2B)
+- **UI/App:** Streamlit
+- **Optimization:** PyTorch (for optional GPU support in LLM inference)
+
+---
+
+## 📊 Data Model Summary
+
+The final database blueprint comprises **15 core entities** to comprehensively manage all college operations.
+
+### Core Entities & Key Attributes (Examples)
+
+| Category | Entity | Key Attributes (Example) |
+| :--- | :--- | :--- |
+| **Core Academic** | **Student** | `student_id`, `name`, `dob`, `email`, `phone` |
+| | **Professor** | `prof_id`, `name`, `department_id`, `email` |
+| | **Course** | `course_id`, `name`, `department_id`, `credits` |
+| **Operational** | **Hostel** | `hostel_id`, `name`, `capacity` |
+| | **Staff** | `staff_id`, `name`, `role`, `department_id` |
 
 ### Key Relationships
-| Relationship | Cardinality | Description |
+
+| Relationship | Cardinality (Mermaid) | Description |
 | :--- | :--- | :--- |
 | **Student ENROLLS\_IN Enrollment** | One-to-Many (`||--o{`) | Models student registration for courses. |
 | **Professor TEACHES Course** | One-to-Many (`||--o{`) | Links professors to the courses they instruct. |
-| **Hostel HOUSES Student** | One-to-Many (`||--o{`) | Assigns students to residence halls. |
 | **Staff MANAGES Cafeteria/Library** | One-to-Many (`||--o{`) | Defines administrative oversight for facilities. |
 
----
+### Raw Mermaid Code Snippet
+
+The schema for the database is entirely defined in the Mermaid syntax (full code in `Output Text.txt`):
+
+```text
+erDiagram
+    Student {
+        string student_id
+        string name
+        ...
+    }
+    Professor {
+        string prof_id
+        string name
+        ...
+    }
+    // ... (All entities defined)
+    
+    Student ||--o{ Enrollment : "enrolls in"
+    Professor ||--o{ Course : "TEACHES"
+    // ... (All relationships defined)
+````
+
+-----
+
+## 💻 Setup & Execution
+
+These instructions are for setting up and running the multi-LLM prompting tool (`invokeMultipleLLMs.py`) locally.
+
+### 1️⃣ Prerequisites
+
+1.  **Install Ollama** and pull the required models:
+    ```bash
+    ollama run llama3
+    ollama run gemma2:2b
+    ```
+2.  **Install Python Dependencies**:
+    ```bash
+    pip install streamlit litellm torch
+    ```
+
+### 2️⃣ Execution
+
+Run the Streamlit application from your terminal:
+
+```bash
+streamlit run invokeMultipleLLMs.py
+```
+
+**Output:** The application will start and open in your browser (e.g., `http://localhost:8501`), allowing you to compare LLM outputs in real-time.
+
+-----
 
 ## 📁 Repository Contents
 
 | File | Description |
 | :--- | :--- |
-| `ER Diagram.png` | The final, visual ER Diagram generated by Llama 3. |
-| `Output Text.txt` | The raw **Mermaid code** used to generate the diagram. |
-| `Prompt Text.txt` | The detailed instructions provided to the LLMs to generate the ER diagram. |
-| `invokeMultipleLLMs.py` | The Streamlit/LiteLLM Python script used to prompt and compare the LLM outputs, including GPU support. |
-| `README.md` | This documentation file. |
+| `ER Diagram.png` | **The final, visual ER Diagram.** |
+| `Output Text.txt` | The raw **Mermaid ER code** used to generate the diagram. |
+| `Prompt Text.txt` | The detailed instructions provided to the LLMs. |
+| `invokeMultipleLLMs.py` | The Streamlit/LiteLLM Python script for the multi-LLM workflow. |
+| `Prompt Screenshot.png` | Screenshot of the Streamlit application's input interface. |
+| `Output Screenshot.png` | Screenshot of the Mermaid rendering in the app. |
 
----
+-----
 
-## 🚀 How to Run the LLM Comparison Tool
+## 🧑‍💻 Author
 
-The `invokeMultipleLLMs.py` script allows you to test multiple LLMs with a single prompt simultaneously.
+**Rusheel Vijay Sable**
 
-### Prerequisites
-1.  **Install Ollama** and the required models (Llama 3, Gemma 2:2B):
-    ```bash
-    ollama run llama3
-    ollama run gemma2:2b
-    ```
-2.  **Python Dependencies**:
-    ```bash
-    # Includes Streamlit, LiteLLM, and PyTorch (for optional GPU detection)
-    pip install streamlit litellm torch
-    ```
+  * **Role:** Full Stack & AI Developer | Data Science Enthusiast
+  * **Motto:** "Building scalable solutions using generative AI and robust database design principles."
 
-### Execution
-Run the Streamlit application from your terminal:
-```bash
-streamlit run invokeMultipleLLMs.py
+<!-- end list -->
+
+```
+```
