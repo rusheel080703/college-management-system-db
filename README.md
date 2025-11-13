@@ -1,140 +1,62 @@
-##### ER Diagram Homework – College Management System
+# 🎓 College Management System Database Blueprint
 
- 
+### Project Overview
 
-###### ***Overview***
+This repository presents the detailed Entity-Relationship (ER) Diagram and data model for a comprehensive College Management System (CMS). [cite_start]The system models key aspects of academic, administrative, and extracurricular college operations[cite: 2, 3].
 
+The diagram serves as a robust blueprint for implementing the college's relational database.
 
+---
 
-This homework focuses on designing a detailed ER diagram for a small college management system.
+### ⚙️ Methodology: LLM-Assisted Design
 
-The diagram models key entities, their attributes, and relationships to represent the college's academic, administrative, and extracurricular operations.
+[cite_start]The ER diagram was generated using a multi-LLM workflow to ensure accuracy and comprehensive coverage of the requirements[cite: 4, 7].
 
-The system covers student enrollment, courses, professors, classrooms, departments, hostels, libraries, clubs, staff, events, and cafeterias.
+* [cite_start]**Primary Tool:** Llama 3 via Ollama[cite: 4, 7, 8].
+* [cite_start]**Secondary Tool:** Gemma 2:2B via Ollama[cite: 4, 7].
+* [cite_start]**Visualization:** The output was rendered visually using **Mermaid.js**[cite: 7].
 
+[cite_start]*(Note: While both LLMs were tested, Llama 3 provided the most accurate and usable ER diagram syntax[cite: 4, 8]. The full prompt used is available in `Prompt Text.txt`.)*
 
+---
 
-We used Llama 3 and Gemma 2:2B via Ollama to generate the ER diagram, but Llama 3 produced *the* correct final output.
+### 📊 Data Model (Entities & Relationships)
 
+[cite_start]The system is modeled using 15 core entities, defining attributes and cardinality relationships between them[cite: 5, 6].
 
+#### Core Academic Entities (9)
+| Entity | Attributes Example |
+| :--- | :--- |
+| [cite_start]**Student** | student\_id, name, dob, email, phone [cite: 5] |
+| [cite_start]**Professor** | prof\_id, name, department\_id, email [cite: 15] |
+| [cite_start]**Course** | course\_id, name, department\_id, credits [cite: 5] |
+| [cite_start]**Enrollment** | enrollment\_id, student\_id, course\_id, grade\_point\_average [cite: 17] |
+| [cite_start]**Department** | dept\_id, dept\_name [cite: 16] |
 
-###### ***Entities***
+#### Operational Entities (6)
+* [cite_start]**Hostel:** hostel\_id, name, capacity [cite: 5, 19]
+* [cite_start]**Library** [cite: 6]
+* [cite_start]**Club** [cite: 6]
+* [cite_start]**Staff** [cite: 6]
+* [cite_start]**Event** [cite: 6]
+* [cite_start]**Cafeteria** [cite: 6]
 
+#### Key Relationships Examples
+| Relationship | Cardinality | Description |
+| :--- | :--- | :--- |
+| **Student ENROLLS\_IN Enrollment** | [cite_start]Many-to-Many [cite: 6] | Models student registration for courses. |
+| **Professor TEACHES Course** | [cite_start]One-to-Many [cite: 6] | Links professors to the courses they instruct. |
+| **Hostel HOUSES Student** | [cite_start]One-to-Many [cite: 6, 22] | Assigns students to residence halls. |
+| **Staff MANAGES Cafeteria & Library** | [cite_start]Many-to-One [cite: 6, 22] | Defines administrative oversight. |
 
+---
 
-The system includes core academic entities and additional operational entities:
+### 📁 Repository Contents
 
-
-
-Core (9): Student, Professor, Class, School, Department, Course, Room, Enroll, Building.
-
-
-
-Additional (6): Library, Hostel, Club, Staff, Event, Cafeteria.
-
-
-
-Each entity has clearly defined attributes, such as:
-
-
-
-Student: student\_id, name, dob, email, phone
-
-
-
-Course: course\_id, name, department\_id, credits
-
-
-
-Hostel: hostel\_id, name, capacity
-
-
-
-
-
-###### ***Relationships***
-
-
-
-The ER diagram defines cardinality relationships between entities:
-
-
-
-* Student ENROLLS\_IN Enrollment (many-to-many)
-
-
-
-* Professor TEACHES Course (one-to-many)
-
-
-
-* Course ENROLLED\_IN Enrollment (many-to-many)
-
-
-
-* Professor WORKS\_AT Department (many-to-one)
-
-
-
-* Classroom HOLDS Schedule (one-to-many)
-
-
-
-* Schedule DEALS\_WITH Assignment (one-to-many)
-
-
-
-* Student TAKES Exam (many-to-many)
-
-
-
-* Club HOSTS Event (one-to-many)
-
-
-
-* Staff MANAGES Cafeteria \& Library (many-to-one)
-
-
-
-* Hostel HOUSES Student (one-to-many)
-
-
-
-These relationships reflect real-world college operations, showing how students, staff, courses, and facilities interact.
-
-
-
-
-
-###### ***Tools \& Workflow***
-
-
-
-* Llama 3 (primary) and Gemma 2:2B (secondary) via Ollama
-
-
-
-* Mermaid.js for visual ER diagram rendering
-
-
-
-* VS Code for writing and testing Mermaid syntax
-
-
-
-* Markdown for documentation and README
-
-
-
-Note: While both LLMs were tested, Llama 3 provided the accurate and usable ER diagram syntax, including proper entity attributes and relationships.
-
-
-
-###### ***Outcome***
-
-
-
-The final ER diagram was generated using Llama 3, as it provided a more accurate structure than Gemma 2:2B.
-
-It models the college database effectively and can serve as a blueprint for implementation.
-
+| File | Description |
+| :--- | :--- |
+| `ER Diagram.jpg` | **The final, visual ER Diagram generated by Llama 3.** |
+| `Output Text.txt` | [cite_start]The raw Mermaid code used to generate the diagram[cite: 15]. |
+| `invokeMultipleLLMs.py` | [cite_start]The Streamlit/LiteLLM Python script used to prompt and compare the LLM outputs[cite: 1]. |
+| `Prompt Text.txt` | [cite_start]The detailed instructions provided to the LLMs to generate the ER diagram[cite: 10]. |
+| `README.md` | This documentation file. |
